@@ -7,6 +7,7 @@
     feh
     xlibs.xset
     xorg.xmessage
+    compton
   ];
 
   services.xserver = {
@@ -19,6 +20,7 @@
     displayManager = {
       sessionCommands = ''
         ${pkgs.xlibs.xset}/bin/xsetroot -cursor_name left_ptr
+        ${pkgs.compton}/bin/compton -b --config /home/forkk/.compton.conf
       '';
     };
 
