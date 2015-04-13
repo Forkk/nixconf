@@ -20,6 +20,8 @@
     displayManager = {
       sessionCommands = ''
         ${pkgs.xlibs.xset}/bin/xsetroot -cursor_name left_ptr
+        ${pkgs.xlibs.xset}/bin/xset -dpms
+        ${pkgs.xlibs.xset}/bin/xset s off
         ${pkgs.compton}/bin/compton -b --config /home/forkk/.compton.conf
       '';
     };

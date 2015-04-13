@@ -3,6 +3,8 @@
 
 {
   environment.systemPackages = with pkgs; [
+    pulseaudio
+    pavucontrol
     numix-gtk-theme
   ];
 
