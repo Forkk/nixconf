@@ -2,6 +2,10 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    numix-gtk-theme
+  ];
+
   services.xserver = {
     enable = true;
     layout = "us";
