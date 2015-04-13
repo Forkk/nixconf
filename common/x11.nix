@@ -3,7 +3,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    pulseaudio
     pavucontrol
     numix-gtk-theme
   ];
@@ -19,5 +18,9 @@
         ${pkgs.xlibs.xset}/bin/xset -b
       '';
     };
+  };
+
+  hardware.pulseaudio = {
+    enable = true;
   };
 }
