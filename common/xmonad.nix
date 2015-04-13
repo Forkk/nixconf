@@ -8,7 +8,10 @@
     xlibs.xset
     xorg.xmessage
     compton
+    slock
   ];
+
+  security.setuidPrograms = [ "slock" ];
 
   services.xserver = {
     windowManager.default = "xmonad";
