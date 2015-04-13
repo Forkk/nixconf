@@ -2,6 +2,8 @@
 { pkgs, ... }:
 
 {
+  time.timeZone = "America/Chicago";
+
   # Select internationalisation properties.
   i18n = {
     consoleFont = "lat9w-16";
