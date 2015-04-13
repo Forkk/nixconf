@@ -3,9 +3,17 @@
 
 {
   environment.systemPackages = with pkgs; [
-    firefox
+    firefoxWrapper
     kde4.quasselClient
 
     rxvt_unicode
   ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    firefox = {
+      enableGoogleTalkPlugin = true;
+      enableAdobeFlash = true;
+    };
+  };
 }
