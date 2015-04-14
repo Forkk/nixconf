@@ -13,7 +13,6 @@
     haskellPackages.ghc
     haskellPackages.xmonad
     haskellPackages.taffybar
-    haskellPackages.xmobar # TODO: Switch to taffybar
   ];
 
   security.setuidPrograms = [ "slock" ];
