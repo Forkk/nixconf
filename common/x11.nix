@@ -4,8 +4,12 @@
 {
   environment.systemPackages = with pkgs; [
     pavucontrol
-    numix-gtk-theme
+    lxappearance
   ];
+
+  environment.variables = {
+    GTK_DATA_PREFIX = "$HOME/.nix-profile";
+  };
 
   services.xserver = {
     enable = true;
