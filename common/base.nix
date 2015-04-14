@@ -17,10 +17,14 @@
     # Shell utils
     wget
     curl
+    file
+    tmux
+    mtr
 
-    # Dev utils
-    git
+    # Dev utils and version control
     gcc
+    git
+    vcsh
 
     # Editors and stuff
     vim
@@ -29,6 +33,5 @@
 
     # Misc.
     rxvt_unicode.terminfo
-    vcsh
   ];
 }
