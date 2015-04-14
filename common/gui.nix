@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     firefoxWrapper
     kde4.quasselClient
+    teamspeak_client
 
     rxvt_unicode
   ];
