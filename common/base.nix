@@ -34,4 +34,8 @@
     # Misc.
     rxvt_unicode.terminfo
   ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 }
