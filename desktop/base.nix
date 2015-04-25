@@ -1,4 +1,6 @@
-# Module with common GUI applications.
+# Module with configuration options used on desktop systems.
+# Note that "desktop" in this case refers to something that is not a server,
+# including laptops.
 { pkgs, ... }:
 
 {
