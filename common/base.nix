@@ -20,6 +20,7 @@
     file
     tmux
     mtr
+    mosh
 
     # Dev utils and version control
     gcc
