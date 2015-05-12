@@ -1,7 +1,7 @@
 # Redirects
 server
 {
-  server_name www.forkk.net ps.forkk.net;
+  server_name www.forkk.net;
 
   root /var/www/forkk.net;
 
@@ -70,7 +70,7 @@ server
   server_name siteci.forkk.net;
   location /
   {
-    proxy_pass http://localhost:8012;
+    proxy_pass http://localhost:8010;
     proxy_set_header  X-Real-IP  $remote_addr;
   }
 }
