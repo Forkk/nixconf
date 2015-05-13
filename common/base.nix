@@ -33,6 +33,7 @@
     emacs24Packages.cask
 
     # Misc.
+    nixops
     rxvt_unicode.terminfo
   ];
 
