@@ -7,9 +7,9 @@ let
   defUsers  = filterAttrs (name: cfg: cfg.user  == "buildbot");
   defGroups = filterAttrs (name: cfg: cfg.group == "buildbot");
   defUserMasters = defUsers cfg.masters;
-  defUserSlaves = defUsers cfg.masters;
+  defUserSlaves = defUsers cfg.slaves;
   defGroupMasters = defGroups cfg.masters;
-  defGroupSlaves = defGroups cfg.masters;
+  defGroupSlaves = defGroups cfg.slaves;
 in
 {
   imports = [
@@ -21,12 +21,12 @@ in
   # master or slave using them.
   config = {
     # TODO: UID & GID?
-    users.extraUsers.buildbot = mkIf (defUserMasters != {} && defUserSlaves != {}) {
+    users.extraUsers.buildbot = mkIf (defUserMasters != {} || defUserSlaves != {}) {
       group = "buildbot";
       home = "/var/lib/buildbot";
     };
 
-    users.extraGroups.buildbot = mkIf (defGroupMasters != {} && defGroupSlaves != {}) {
+    users.extraGroups.buildbot = mkIf (defGroupMasters != {} || defGroupSlaves != {}) {
     };
   };
 }
