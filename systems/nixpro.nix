@@ -64,6 +64,7 @@
       };
     };
 
+    virtualboxHost.enable = true;
   };
 
   fonts = {
