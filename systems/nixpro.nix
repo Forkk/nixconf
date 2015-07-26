@@ -63,7 +63,20 @@
         '';
       };
     };
+
   };
+
+  fonts = {
+    enableFontDir = true;
+    enableGhostscriptFonts = true;
+    fonts = with pkgs; [
+      corefonts  # Micrsoft free fonts
+      inconsolata  # monospaced
+      ipafont
+      ubuntu_font_family  # Ubuntu fonts
+    ];
+  };
+
   hardware.bluetooth.enable = true;
 
   nixpkgs.config = {
