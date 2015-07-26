@@ -64,6 +64,8 @@
       };
     };
 
+    redshift.enable = true;
+
     virtualboxHost.enable = true;
   };
 
