@@ -64,4 +64,12 @@
       };
     };
   };
+  hardware.bluetooth.enable = true;
+
+  nixpkgs.config = {
+    packageOverrides = {
+      bluez = pkgs.bluez5;
+    };
+  };
+
 }
