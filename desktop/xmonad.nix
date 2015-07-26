@@ -9,10 +9,23 @@
     xorg.xmessage
     compton
     slock
+    openbox
 
     haskellPackages.ghc
     haskellPackages.xmonad
     haskellPackages.taffybar
+    
+    (pkgs.writeScriptBin "lock-screen" ''
+      ${pkgs.xlibs.xset}/bin/xset dpms force off
+      ${pkgs.xlibs.xset}/bin/xset dpms 5
+      slock
+      ${pkgs.xlibs.xset}/bin/xset -dpms
+    '')
+
+    (pkgs.writeScriptBin "temp-openbox" ''
+      openbox
+      ~/.xmonad/xmonad-x86_64-linux "$@"
+    '')
   ];
 
   security.setuidPrograms = [ "slock" ];
@@ -32,9 +45,6 @@
     displayManager = {
       sessionCommands = ''
         eval `${pkgs.dbus_daemon}/bin/dbus-launch --auto-syntax`
-        ${pkgs.xlibs.xset}/bin/xsetroot -cursor_name left_ptr
-        ${pkgs.xlibs.xset}/bin/xset -dpms
-        ${pkgs.xlibs.xset}/bin/xset s off
         ${pkgs.compton}/bin/compton -b --config /home/forkk/.compton.conf
       '';
     };

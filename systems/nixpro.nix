@@ -9,6 +9,7 @@
       ../desktop/xmonad.nix
       ../desktop/base.nix
       ../desktop/x11.nix
+      ../desktop/cmds.nix
 
       ../misc/latex.nix
 

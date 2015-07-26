@@ -20,6 +20,9 @@
       sessionCommands = ''
         ${pkgs.xlibs.xset}/bin/xset r rate 250 42
         ${pkgs.xlibs.xset}/bin/xset -b
+        ${pkgs.xlibs.xset}/bin/xset -dpms
+        ${pkgs.xlibs.xset}/bin/xset s off
+        ${pkgs.xlibs.xmodmap}/bin/xmodmap ~/.Xmodmap
       '';
     };
   };
