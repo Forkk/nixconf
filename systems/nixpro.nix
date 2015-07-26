@@ -4,6 +4,7 @@
 {
   imports =
     [ ../common/base.nix
+      ../common/nixmerge.nix
 
       ../desktop/xmonad.nix
       ../desktop/base.nix
@@ -25,6 +26,12 @@
     hostId = "c6e0bc2a";
 
     wireless.enable = true;
+  };
+
+  nixpkgs.nixmerge = {
+    enable = true;
+    mergeRepo = https://github.com/Forkk/nixpkgs.git;
+    branches = [ ];
   };
 
   # List services that you want to enable:
