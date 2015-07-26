@@ -38,6 +38,13 @@
   services = {
     upower.enable = true;
 
+    plex = {
+      enable = true;
+      extraPlugins = [
+        ../plex/plugins/AniDB.bundle
+      ];
+    };
+
     xserver = {
       synaptics = {
         enable = true;

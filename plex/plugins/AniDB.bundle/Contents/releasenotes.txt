@@ -1,0 +1,8 @@
+Version 13:
+- Added title language selection in preferences. Default is English.
+
+Version 12:
+- Added handling of specials. See http://wiki.plexapp.com/index.php/PlexNine_PMS_Naming_Guide#Specials for info on file structure.
+
+Version 11:
+- Minor update to avoid unnecessary logging from connection reaper thread.
