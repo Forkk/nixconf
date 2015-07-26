@@ -48,6 +48,11 @@
       ];
     };
 
+    printing = {
+      enable = true;
+      drivers = [ pkgs.hplip pkgs.gutenprint ];
+    };
+
     xserver = {
       synaptics = {
         enable = true;
