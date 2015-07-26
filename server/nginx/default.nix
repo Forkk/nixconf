@@ -5,7 +5,7 @@ with lib;
 
 let
   cfg = config.services.nginx;
-  siteConfigs = concatStringsSep "\n\n" (map readFile cfg.sites);
+  siteConfigs = concatStringsSep "\n\n" cfg.sites;
 
   mkWwwDir = dir: ''
     mkdir -p /var/www/${dir.name}
@@ -16,10 +16,10 @@ in
   options = {
     services.nginx = {
       sites = mkOption {
-        type = types.listOf types.path;
+        type = types.listOf types.string;
         default = [];
         description = ''
-          A list of files defining sites to add to nginx's config.
+          A list of strings defining sites to add to nginx's config.
         '';
       };
 

@@ -1,14 +1,3 @@
-# Redirects
-server
-{
-  server_name www.forkk.net;
-
-  root /var/www/forkk.net;
-
-  # Redirect everything to forkk.net.
-  rewrite ^ http://forkk.net$request_uri redirect;
-}
-
 # Actual site
 server
 {
@@ -60,17 +49,5 @@ server
     deny all;
     access_log off;
     log_not_found off;
-  }
-}
-
-# Buildbot
-server
-{
-  listen 80;
-  server_name siteci.forkk.net;
-  location /
-  {
-    proxy_pass http://localhost:8010;
-    proxy_set_header  X-Real-IP  $remote_addr;
   }
 }

@@ -2,12 +2,34 @@
 # website and Plex Media Server.
 { config, pkgs, lib, ... }:
 
+let
+  nginxProxySite =
+    { serverNames, passTo,
+      serverExtra ? "", locationExtra ? "" }: ''
+    server
+    {
+      server_name ${toString serverNames};
+      location /
+      {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_pass ${passTo};
+
+        ${locationExtra}
+      }
+
+      ${serverExtra}
+    }
+    '';
+in
 {
   imports =
     [ ../common/base.nix
       ../common/nixmerge.nix
 
       ../server/nginx
+      ../server/nginx/fallback-site.nix
+
       ../server/buildbot
 
       ../users/forkk.nix
@@ -43,7 +65,13 @@
     # Web Server
     nginx = {
       enable = true;
-      sites = [ ../server/sites/forkknet ];
+      sites = [
+        (lib.readFile ../server/sites/forkknet)
+        (nginxProxySite {
+          serverNames = [ "siteci.forkk.net" ];
+          passTo = "http://localhost:8010";
+        })
+      ];
       siteDirs = {
         "forkk.net" = {
           user = "buildbot";
