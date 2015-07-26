@@ -10,6 +10,8 @@
       ../desktop/base.nix
       ../desktop/x11.nix
 
+      ../misc/latex.nix
+
       ../users/forkk.nix
     ];
 
