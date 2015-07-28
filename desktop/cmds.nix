@@ -26,5 +26,17 @@
     (writeScriptBin "wifi-reset" ''
       sudo systemctl restart wpa_supplicant
     '')
+
+    # This script fixes T-Mobile's stupid DNS configuration, which causes emacs
+    # to lock up on startup when my computer is tethered to my phone. There's
+    # probably a better way of fixing this (like permanently setting these as my
+    # DNS servers), but I'm lazy and Nix won't let me set DNS servers on a
+    # per-network basis.
+    (writeScriptBin "fix-dns" ''
+      cat <<EOF > /etc/resolv.conf
+      nameserver 8.8.8.8
+      nameserver 8.8.4.4
+      EOF
+    '')
   ];
 }
