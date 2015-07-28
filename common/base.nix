@@ -15,12 +15,22 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # Shell utils
-    wget
     curl
     file
-    tmux
-    mtr
+    htop
     mosh
+    mtr
+    psmisc
+    tmux
+    wget
+
+    # Archive tools
+    p7zip
+    unrar
+    unzip
+
+    # Network tools
+    telnet
 
     # Dev utils and version control
     gcc
@@ -28,12 +38,15 @@
     vcsh
 
     # Editors and stuff
-    vim
     emacs
     emacs24Packages.cask
+    vim
 
     # Misc.
+    aspell
+    lm_sensors
     nixops
+    pandoc
     rxvt_unicode.terminfo
   ];
 

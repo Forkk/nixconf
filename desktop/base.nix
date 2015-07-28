@@ -5,11 +5,28 @@
 
 {
   environment.systemPackages = with pkgs; [
+    audacity
+    dropbox
+    evince
     firefoxWrapper
     kde4.quasselClient
+    libreoffice
+    screencloud
+    skype
     teamspeak_client
+    vlc
 
+    glxinfo
+    numix-gtk-theme
     rxvt_unicode
+
+    xbrightness
+    xlibs.xbacklight
+    xlibs.xev
+    xlibs.xkill
+    xlibs.xmodmap
+    xlibs.xwininfo
+    xsel
   ];
 
   nixpkgs.config = {
