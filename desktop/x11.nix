@@ -7,10 +7,6 @@
     lxappearance
   ];
 
-  environment.variables = {
-    GTK_DATA_PREFIX = "$HOME/.nix-profile";
-  };
-
   services.xserver = {
     enable = true;
     layout = "us";

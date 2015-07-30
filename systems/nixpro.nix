@@ -6,10 +6,11 @@
     [ ../common/base.nix
       ../common/nixmerge.nix
 
-      ../desktop/xmonad.nix
       ../desktop/base.nix
-      ../desktop/x11.nix
       ../desktop/cmds.nix
+      ../desktop/gtktheme.nix
+      ../desktop/x11.nix
+      ../desktop/xmonad.nix
 
       ../misc/latex.nix
 

@@ -17,7 +17,6 @@
     vlc
 
     glxinfo
-    numix-gtk-theme
     rxvt_unicode
 
     xbrightness
