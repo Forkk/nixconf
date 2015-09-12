@@ -11,6 +11,9 @@
     ]; })
     biber
     tex4ht
+    ghostscript
+    aspell
+    aspellDicts.en
 
     # A latexmk alias which runs the command with the -pdf flag.
     # This is used to get emacs's latex-preview-mode to work properly with latexmk.

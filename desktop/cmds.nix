@@ -7,7 +7,7 @@
     (writeScriptBin "toggle-cursor" ''
       killall unclutter || ${pkgs.unclutter}/unclutter -idle 0 -root &
     '')
-    
+
     (writeScriptBin "monitor2" ''
       case $1 in
           "on" )
@@ -17,14 +17,6 @@
           "off" )
               ${pkgs.xlibs.xrandr}/bin/xrandr --output HDMI2 --off
       esac
-    '')
-        
-    (writeScriptBin "toggle-compton" ''
-      killall compton || ${pkgs.compton}/bin/compton -b --config ~/.compton.conf
-    '')
-
-    (writeScriptBin "wifi-reset" ''
-      sudo systemctl restart wpa_supplicant
     '')
 
     # This script fixes T-Mobile's stupid DNS configuration, which causes emacs

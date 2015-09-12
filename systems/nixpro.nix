@@ -4,16 +4,8 @@
 {
   imports =
     [ ../common/base.nix
-      ../common/nixmerge.nix
-
       ../desktop/base.nix
-      ../desktop/cmds.nix
-      ../desktop/gtktheme.nix
-      ../desktop/x11.nix
-      ../desktop/xmonad.nix
-
       ../misc/latex.nix
-
       ../users/forkk.nix
     ];
 
@@ -29,25 +21,22 @@
     hostName = "nixpro";
     hostId = "c6e0bc2a";
 
-    wireless.enable = true;
+    # wireless.enable = true;
+    networkmanager.enable = true;
+
+    firewall.allowedTCPPorts = [ 32400 ];
   };
 
-  nixpkgs.nixmerge = {
+  # Settings for modules in the ./desktop/ directory.
+  desktop = {
     enable = true;
-    mergeRepo = https://github.com/Forkk/nixpkgs.git;
-    branches = [ ];
+    xmonad.enable = true;
+    sleepLock.enable = true;
   };
 
   # List services that you want to enable:
   services = {
     upower.enable = true;
-
-    plex = {
-      enable = true;
-      extraPlugins = [
-        ../plex/plugins/AniDB.bundle
-      ];
-    };
 
     printing = {
       enable = true;
@@ -69,24 +58,11 @@
         '';
       };
     };
-
-    redshift.enable = true;
-
-    virtualboxHost.enable = true;
-  };
-
-  fonts = {
-    enableFontDir = true;
-    enableGhostscriptFonts = true;
-    fonts = with pkgs; [
-      corefonts  # Micrsoft free fonts
-      inconsolata  # monospaced
-      ipafont
-      ubuntu_font_family  # Ubuntu fonts
-    ];
   };
 
   hardware.bluetooth.enable = true;
+
+  hardware.pulseaudio.support32Bit = true;
 
   nixpkgs.config = {
     packageOverrides = {
@@ -100,5 +76,4 @@
       size = 8182;
     }
   ];
-
 }
