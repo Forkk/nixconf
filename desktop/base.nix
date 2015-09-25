@@ -50,6 +50,7 @@ in
       dropbox
       evince
       firefoxWrapper
+      chromium
       kde4.quasselClient
       libreoffice
       # screencloud
