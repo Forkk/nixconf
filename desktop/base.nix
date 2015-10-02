@@ -77,6 +77,10 @@ in
       lockScreen
       comptonStart
       comptonToggle
+
+      (st.override {
+        conf = readFile ./st-config.h;
+      })
     ];
 
     nixpkgs.config = {
