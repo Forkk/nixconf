@@ -104,6 +104,7 @@ in
             ${pkgs.xlibs.xset}/bin/xset -dpms
             ${pkgs.xlibs.xset}/bin/xset s off
             ${pkgs.xlibs.xmodmap}/bin/xmodmap ~/.Xmodmap
+            ${comptonStart}
           '';
         };
       };
@@ -125,6 +126,7 @@ in
         inconsolata  # monospaced
         ipafont
         ubuntu_font_family  # Ubuntu fonts
+        source-code-pro
       ];
     };
 
