@@ -23,8 +23,20 @@ let
         ${pkgs.xlibs.xset}/bin/xset -dpms
       }
       trap revert SIGHUP SIGINT SIGTERM
-      ${pkgs.xlibs.xset}/bin/xset +dpms dpms 15
-      ${pkgs.i3lock}/bin/i3lock -n
+      ${pkgs.xlibs.xset}/bin/xset +dpms dpms 60
+
+      tmpdir=/run/user/$UID/lock-screen
+      [ -d $tmpdir ] || mkdir $tmpdir
+      ${pkgs.scrot}/bin/scrot $tmpdir/screen.png
+      ${pkgs.i3lock}/bin/i3lock -n -i $tmpdir/screen.png &
+      temp_pid=$!
+      # ${pkgs.imagemagick}/bin/convert $tmpdir/screen.png -scale 10% -scale 1000% $tmpdir/screen.png
+      ${pkgs.imagemagick}/bin/convert -gaussian-blur 6x6 $tmpdir/screen.png $tmpdir/screen.png
+      ${pkgs.i3lock}/bin/i3lock -n -i $tmpdir/screen.png &
+      i3pid=$!
+      kill $temp_pid
+      wait $i3pid
+      rm $tmpdir/screen.png
       revert
     '');
 in
