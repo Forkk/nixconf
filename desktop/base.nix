@@ -99,6 +99,9 @@ in
     ];
 
     nixpkgs.config = {
+      chromium = {
+        enablePepperFlash = true;
+      };
       firefox = {
         enableGoogleTalkPlugin = true;
         enableAdobeFlash = true;
