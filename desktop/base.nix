@@ -156,7 +156,7 @@ in
       script = ''
         export DISPLAY=`${pkgs.procps}/bin/w -f | tail -n +3 | ${pkgs.gawk}/bin/awk '{print $2}'`
         # export USER=forkk
-        ${lockScreen}/bin/lock-screen
+        ${pkgs.i3lock}/bin/i3lock -n
       '';
       environment = { DISPLAY = ":0"; };
       serviceConfig.Type = "simple";
