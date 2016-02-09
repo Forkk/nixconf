@@ -22,7 +22,6 @@ in
       openbox
 
       haskellPackages.ghc
-      haskellPackages.xmonad
       haskellPackages.taffybar
 
       (pkgs.writeScriptBin "temp-openbox" ''

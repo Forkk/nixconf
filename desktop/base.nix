@@ -93,6 +93,8 @@ in
       comptonStart
       comptonToggle
 
+      steam
+
       (st.override {
         conf = readFile ./st-config.h;
       })
@@ -129,11 +131,15 @@ in
     };
 
     hardware.opengl = {
+      enable = true;
       driSupport = true;
       driSupport32Bit = true;
     };
 
-    hardware.pulseaudio.enable = true;
+    hardware.pulseaudio = {
+      enable = true;
+      support32Bit = true;
+    };
 
     # Font Settings
     fonts = {
@@ -145,6 +151,7 @@ in
         ipafont
         ubuntu_font_family  # Ubuntu fonts
         source-code-pro
+        opensans-ttf
       ];
     };
 

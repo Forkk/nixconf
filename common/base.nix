@@ -15,14 +15,15 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # Shell utils
-    curl
-    file
-    htop
-    mosh
-    mtr
+    curl wget
+    file ncdu
+    htop iotop
+    mtr traceroute
+    usbutils pciutils
+    lm_sensors
     psmisc
+    mosh
     tmux
-    wget
 
     # Archive tools
     p7zip
@@ -44,7 +45,6 @@
 
     # Misc.
     aspell
-    lm_sensors
     nixops
     pandoc
     rxvt_unicode.terminfo
