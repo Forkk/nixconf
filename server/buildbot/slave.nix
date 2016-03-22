@@ -114,7 +114,7 @@ in
                   Name to list as the admin for this build slave.
                 '';
               };
-              
+
               info.host = mkOption {
                 type = types.str;
                 default = "Buildbot slave running on NixOS.";

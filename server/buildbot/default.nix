@@ -12,21 +12,28 @@ let
   defGroupSlaves = defGroups cfg.slaves;
 in
 {
+  options = {
+    services.buildbot = {
+      enable = mkEnableOption "buildbot";
+    };
+  };
+
   imports = [
     ./master.nix
     ./slave.nix
   ];
 
-  # Add default "buildbot" user and group if there is at least one buildbot
-  # master or slave using them.
   config = {
     # TODO: UID & GID?
-    users.extraUsers.buildbot = mkIf (defUserMasters != {} || defUserSlaves != {}) {
+
+    # We always create users when this module is imported. If this were in
+    # nixpkgs, we would need a different approach here.
+    users.extraUsers.buildbot = {
       group = "buildbot";
       home = "/var/lib/buildbot";
     };
 
-    users.extraGroups.buildbot = mkIf (defGroupMasters != {} || defGroupSlaves != {}) {
+    users.extraGroups.buildbot = {
     };
   };
 }

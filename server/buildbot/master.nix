@@ -4,25 +4,6 @@
 with lib;
 
 let
-  # We have to override the buildbot package's SQLAlchemy and
-  # SQLAlchemy_Migrate libraries since the ones in nixpkgs at the moment are
-  # broken.
-  # TODO: Make a PR to get this fixed in nixpkgs.
-  buildbot = with pkgs; with pythonPackages; pkgs.buildbot.override {
-    sqlalchemy = sqlalchemy9;
-    sqlalchemy_migrate = sqlalchemy_migrate.override rec {
-      name = "sqlalchemy-migrate-${version}";
-      version = "0.9.6";
-
-      buildInputs = [ pip nose unittest2 scripttest pbr ];
-      propagatedBuildInputs = [ tempita decorator sqlalchemy9 six decorator sqlparse ];
-
-      src = pkgs.fetchurl {
-        url = "https://pypi.python.org/packages/source/s/sqlalchemy-migrate/${name}.tar.gz";
-        sha256 = "15rxxzhgzrvg91ll8mnh9vvzcz79qaxf68l6km2rd6mjps6kviy2";
-      };
-    };
-  };
   bbcfg = config.services.buildbot;
   configFile = name: cfg: pkgs.writeText "buildbot-${cfg.name}" cfg.config;
 in
@@ -79,8 +60,7 @@ in
             config = mkMerge [{
               inherit name;
               dataDir = mkDefault "/var/lib/buildbot/master/${name}";
-            }];
-        }));
+            }];}));
         default = {};
         description = ''
           Buildbot masters to run on this system.
@@ -94,7 +74,7 @@ in
       description = "Buildbot master \"${name}\"";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      path = [ buildbot ];
+      path = [ pkgs.buildbot ];
       preStart = ''
         echo "Initializing buildbot directory for master \"${name}\"."
         mkdir -p ${cfg.dataDir}
@@ -108,7 +88,7 @@ in
         User = cfg.user;
         Group = cfg.group;
         PermissionsStartOnly = "true";
-        ExecStart = "${buildbot}/bin/buildbot start --nodaemon ${cfg.dataDir}";
+        ExecStart = "${pkgs.buildbot}/bin/buildbot start --nodaemon ${cfg.dataDir}";
       };
     }) bbcfg.masters;
   };
