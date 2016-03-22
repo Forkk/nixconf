@@ -17,6 +17,8 @@
   networking = {
     hostName = "homebase"; # Define your hostname.
     networkmanager.enable = true;
+
+    firewall.allowedTCPPorts = [ 32400 ];
   };
 
   desktop = {
@@ -47,11 +49,31 @@
       monitorSection = ''
       '';
     };
+
+    plex = {
+      enable = true;
+      managePlugins = false;
+      package = pkgs.plex.overrideDerivation (old: {
+        version = "0.9.16.3.1840";
+        vsnHash = "cece46d";
+
+        src = pkgs.fetchurl {
+          url = "https://downloads.plex.tv/plex-media-server/0.9.16.3.1840-cece46d/plexmediaserver-0.9.16.3.1840-cece46d.x86_64.rpm";
+          sha256 = "0p1rnia18a67h05f7l7smkpry1ldkpdkyvs9fgrqpay3w0jfk9gd";
+        };
+      });
+    };
   };
 
   virtualisation = {
     virtualbox = {
       host.enable = true;
     };
+  };
+
+  environment.variables = {
+    __GL_SYNC_TO_VBLANK="1";
+    __GL_SYNC_DISPLAY_DEVICE="DP-0";
+    __VDPAU_NVIDIA_SYNC_DISPLAY_DEVICE="DP-0";
   };
 }

@@ -93,6 +93,8 @@ in
       comptonStart
       comptonToggle
 
+      exfat
+
       steam
 
       (st.override {

@@ -60,4 +60,10 @@ in
       qt5.base = pkgs.qt5.base.override { gtkStyle = true; };
     };
   };
+
+  services.xserver.displayManager.sessionCommands = ''
+    # This allows GTK to load SVG icons.
+    export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg}/lib/gdk-pixbuf-2.0/*/loaders.cache)
+    #*/) <- This fools emacs syntax highlighting. It thinks there's a comment on the above line.
+  '';
 }
