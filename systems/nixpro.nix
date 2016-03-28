@@ -58,6 +58,21 @@
         '';
       };
     };
+
+    tarsnap = {
+      enable = true;
+      keyfile = "/root/tarsnap.key";
+      archives = {
+        home = {
+          directories = [ "/home/forkk" ];
+          excludes = [
+            "/home/forkk/.local/share/Steam/"
+          ];
+          period = "2:00";
+          printStats = true;
+        };
+      };
+    };
   };
 
   hardware.bluetooth.enable = true;
