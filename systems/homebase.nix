@@ -63,6 +63,33 @@
         };
       });
     };
+
+    tarsnap = {
+      enable = true;
+      archives = {
+        home = {
+          keyfile = "/root/tarsnap/home.key";
+          directories = [ "/home/forkk" ];
+          excludes = [
+            "/home/forkk/.local/share/Steam/"
+            "/home/forkk/VirtualBox VMs/"
+            "/home/forkk/trash/"
+            "/home/forkk/Downloads/"
+            "/home/forkk/Dropbox/"
+            "/home/forkk/.cache/"
+          ];
+          period = "4:00";
+          printStats = true;
+          checkpointBytes = "5GB";
+        };
+        var = {
+          keyfile = "/root/tarsnap/var.key";
+          directories = [ "/var/lib/plex" ];
+          period = "2:00";
+          printStats = true;
+        };
+      };
+    };
   };
 
   virtualisation = {
