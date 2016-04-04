@@ -178,6 +178,46 @@ void switchcolor(const Arg *arg) {
   redraw();
 }
 
+// Checks which colorname we should set
+char** checkcolor() {
+  char path[128];
+  strcpy(path, getenv("HOME"));
+  strcat(path, "/.config/colorscheme");
+
+  char data[256];
+
+  FILE* file = fopen(path, "r");
+  if (file <= 0) {
+    perror("Failed to read color scheme");
+    return colorname_light;
+  }
+
+  fgets(data, 256, (FILE*)file);
+  fclose(file);
+
+  if (strcmp(data, "dark") == 0 || strcmp(data, "dark\n") == 0) {
+    return colorname_dark;
+  } else {
+    return colorname_light;
+  }
+}
+
+void reloadcolor(const Arg *arg) {
+  colorname = checkcolor();
+  xloadcols();
+  redraw();
+}
+
+// Override main so we can check color schemes on startup. Yay hacks!
+int main(int argc, char *argv[]) {
+  colorname = checkcolor();
+  return st_main(argc, argv);
+}
+
+// Use #define to rename st's main.
+#define main st_main
+
+
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 
@@ -195,7 +235,9 @@ static Shortcut shortcuts[] = {
 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_T,           switchcolor,    {.i =  0} },
+	{ MODKEY|ShiftMask,     XK_R,           reloadcolor,    {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
+	{ XK_ANY_MOD,           XK_F13,         reloadcolor,    {.i =  0} },
 };
 
 /*
