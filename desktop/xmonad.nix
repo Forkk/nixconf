@@ -5,6 +5,10 @@ with lib;
 
 let
   cfg = config.desktop.xmonad;
+  callPackage = lib.callPackageWith (pkgs // pkgs.xorg);
+
+  j4-dmenu-desktop = callPackage ./pkgs/j4-dmenu-desktop {
+  };
 in
 {
   options = {
@@ -16,6 +20,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       dmenu
+      j4-dmenu-desktop
       feh
       xlibs.xset
       xorg.xmessage
