@@ -48,6 +48,7 @@ in
     ./xmonad.nix
     ./cmds.nix
     ./gtktheme.nix
+    ./steam-controller.nix
   ];
 
   options = {
