@@ -42,6 +42,10 @@ let
       revert
     '');
   lockIcon = ./lockicon.png;
+
+  todoT = pkgs.fetchhg {
+    url = "https://bitbucket.org/sjl/t/";
+  };
 in
 {
   imports = [
@@ -102,6 +106,14 @@ in
         conf = readFile ./st-config.h;
       })
     ];
+
+    environment.variables = {
+      TODO_T_PATH = "${todoT}/t.py";
+    };
+
+    environment.shellAliases = {
+      t = "python ${todoT}/t.py --task-dir ~/Dropbox/tasks --list tasks";
+    };
 
     nixpkgs.config = {
       chromium = {
