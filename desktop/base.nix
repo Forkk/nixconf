@@ -46,12 +46,23 @@ let
   todoT = pkgs.fetchhg {
     url = "https://bitbucket.org/sjl/t/";
   };
+
+  customSt = pkgs.st.override {
+    conf = readFile ./st-config.h;
+  };
+
+  # Runs a terminal in the given directory.
+  viewDir =
+    (pkgs.writeScriptBin "view-dir" ''
+      ${customSt}/bin/st ${pkgs.bash}/bin/bash -c "cd $1 && ls && ${pkgs.bash}/bin/bash"
+    '');
 in
 {
   imports = [
     ./xmonad.nix
     ./cmds.nix
     ./gtktheme.nix
+    ./defaultapps.nix
     ./steam-controller.nix
   ];
 
@@ -65,6 +76,22 @@ in
 
 
   config = mkIf cfg.enable {
+    desktop.mimeapps = {
+      extraDesktopFiles = [
+        (pkgs.makeDesktopItem {
+          name = "st-view-dir";
+          exec = "${viewDir}/bin/view-dir %f";
+          mimeType = "inode/directory";
+          desktopName = "View Directory";
+          genericName = "NixOS default";
+        })
+      ];
+      defaults = {
+        "inode/directory" = "st-view-dir.desktop";
+        "application/pdf" = "evince.desktop";
+      };
+    };
+
     environment.systemPackages = with pkgs; [
       audacity
       dropbox
@@ -87,6 +114,7 @@ in
       rxvt_unicode
 
       xbrightness
+      xdg_utils
       xlibs.xbacklight
       xlibs.xev
       xlibs.xkill
@@ -102,9 +130,7 @@ in
 
       steam
 
-      (st.override {
-        conf = readFile ./st-config.h;
-      })
+      customSt
     ];
 
     environment.variables = {
@@ -125,6 +151,13 @@ in
       };
     };
 
+    nixpkgs.config.packageOverrides = pkgs: rec {
+      xdg_utils = pkgs.stdenv.lib.overrideDerivation pkgs.xdg_utils (oldAttrs: {
+        postInstall = oldAttrs.postInstall + ''
+          sed 's#which #type -P #g' -i "$out"/bin/*
+        '';
+      });
+    };
 
     services = {
       xserver = {
