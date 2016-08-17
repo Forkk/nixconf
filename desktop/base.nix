@@ -68,7 +68,7 @@ in
 
     environment.systemPackages = with pkgs; [
       audacity
-      dropbox
+      dropbox-cli
       evince
       firefoxWrapper
       chromium
