@@ -5,12 +5,12 @@ let
   fhsEnv = pkgs.buildFHSUserEnv {
     name = "game-env";
     targetPkgs = pkgs: with pkgs;
+      [
+      ];
+    multiPkgs = pkgs: with pkgs;
       [ alsaLib
         xlibs.libX11 xlibs.libXext xlibs.libXcursor xlibs.libXrandr xlibs.libXinerama
         rxvt_unicode.terminfo
-      ];
-    multiPkgs = pkgs: with pkgs;
-      [
       ];
     runScript = "bash";
   };

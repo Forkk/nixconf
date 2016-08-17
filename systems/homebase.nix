@@ -13,6 +13,11 @@
 
   # Open source drivers don't support GTX 9xx cards. :(
   boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.kernelModules = [ "xboxdrv" ];
+
+  environment.systemPackages = with pkgs; [
+    xboxdrv
+  ];
 
   networking = {
     hostName = "homebase"; # Define your hostname.
@@ -41,7 +46,8 @@
       screenSection = ''
         Option         "Stereo" "0"
         Option         "nvidiaXineramaInfoOrder" "DFP-2"
-        Option         "metamodes" "DVI-I-1: nvidia-auto-select +1920+0, DP-0: nvidia-auto-select +0+0"
+        Option         "metamodes" "DVI-I-1: nvidia-auto-select +1920+0 { ForceFullCompositionPipeline = On }, DP-0: nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+        Option         "TripleBuffer" "True"
         Option         "SLI" "Off"
         Option         "MultiGPU" "Off"
         Option         "BaseMosaic" "off"
@@ -73,6 +79,7 @@
           excludes = [
             "/home/forkk/.local/share/Steam/"
             "/home/forkk/VirtualBox VMs/"
+            "/home/forkk/virt/"
             "/home/forkk/trash/"
             "/home/forkk/Downloads/"
             "/home/forkk/Dropbox/"
