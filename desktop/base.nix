@@ -114,7 +114,7 @@ in
     };
 
     environment.shellAliases = {
-      t = "python ${todoT}/t.py --task-dir ~/Dropbox/tasks --list tasks";
+      t = "${pkgs.python}/bin/python ${todoT}/t.py --task-dir ~/Dropbox/tasks --list tasks";
     };
 
     nixpkgs.config = {
