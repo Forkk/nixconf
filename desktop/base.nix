@@ -17,32 +17,6 @@ let
       killall compton || ${comptonStart}/bin/compton-start
     '');
 
-  lockScreen =
-    (pkgs.writeScriptBin "lock-screen" ''
-      revert() {
-        ${pkgs.xlibs.xset}/bin/xset -dpms
-      }
-      trap revert SIGHUP SIGINT SIGTERM
-      ${pkgs.xlibs.xset}/bin/xset +dpms dpms 600
-
-      tmpdir=/run/user/$UID/lock-screen
-      [ -d $tmpdir ] || mkdir $tmpdir
-      ${pkgs.scrot}/bin/scrot $tmpdir/screen.png
-      # ${pkgs.i3lock}/bin/i3lock -n -i $tmpdir/screen.png &
-      # temp_pid=$!
-      ${pkgs.imagemagick}/bin/convert $tmpdir/screen.png -scale 10% -scale 1000% $tmpdir/screen.png
-      # ${pkgs.imagemagick}/bin/convert -blur 0x2 $tmpdir/screen.png $tmpdir/screen.png
-		  ${pkgs.imagemagick}/bin/convert -gravity center -composite -matte \
-        $tmpdir/screen.png ${lockIcon} $tmpdir/screen.png
-      ${pkgs.i3lock}/bin/i3lock -n -i $tmpdir/screen.png &
-      i3pid=$!
-      # kill $temp_pid
-      wait $i3pid
-      rm $tmpdir/screen.png
-      revert
-    '');
-  lockIcon = ./lockicon.png;
-
   todoT = pkgs.fetchhg {
     url = "https://bitbucket.org/sjl/t/";
   };
@@ -110,6 +84,9 @@ in
       compton
       i3lock
 
+      scrot
+      imagemagick
+
       glxinfo
       rxvt_unicode
 
@@ -122,7 +99,6 @@ in
       xlibs.xwininfo
       xsel
 
-      lockScreen
       comptonStart
       comptonToggle
 
