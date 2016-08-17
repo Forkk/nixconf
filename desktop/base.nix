@@ -70,7 +70,7 @@ in
       audacity
       dropbox-cli
       evince
-      firefoxWrapper
+      # firefoxWrapper
       chromium
       kde4.quasselClient
       libreoffice
