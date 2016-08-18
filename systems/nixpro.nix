@@ -5,7 +5,6 @@
   imports =
     [ ../common/base.nix
       ../desktop/base.nix
-      ../misc/latex.nix
       ../users/forkk.nix
     ];
 
@@ -24,7 +23,12 @@
     # wireless.enable = true;
     networkmanager.enable = true;
 
-    firewall.allowedTCPPorts = [ 32400 ];
+    firewall.allowedTCPPorts = [
+      5000 32400
+      27036 27037
+    ];
+
+    firewall.allowedUDPPorts = [ 27031 ];
   };
 
   # Settings for modules in the ./desktop/ directory.
