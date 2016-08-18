@@ -63,7 +63,7 @@ in
 
   services.xserver.displayManager.sessionCommands = ''
     # This allows GTK to load SVG icons.
-    export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg}/lib/gdk-pixbuf-2.0/*/loaders.cache)
+    export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)
     #*/) <- This fools emacs syntax highlighting. It thinks there's a comment on the above line.
   '';
 }
