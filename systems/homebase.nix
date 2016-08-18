@@ -5,7 +5,6 @@
     [ ../common/base.nix
       ../desktop/base.nix
       ../desktop/game-env.nix
-      ../misc/latex.nix
       ../users/forkk.nix
 
       /etc/nixos/secrets.nix
@@ -18,6 +17,8 @@
   environment.systemPackages = with pkgs; [
     xboxdrv
   ];
+
+  nix. buildCores = 12;
 
   networking = {
     hostName = "homebase"; # Define your hostname.
